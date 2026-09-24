@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home — Hope Ever Foundation</title>
+  <meta name="description" content="Hope Ever Foundation empowers marginalized communities in Tamil Nadu through livelihoods, education, child rights and sustainable development." />
+  <meta name="theme-color" content="#0d2727" />
+  <meta property="og:title" content="Home — Hope Ever Foundation" />
+  <meta property="og:description" content="Hope Ever Foundation empowers marginalized communities in Tamil Nadu through livelihoods, education, child rights and sustainable development." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://hopeever.org/assets/images/common/circular_logo-removebg-preview.png" />
+  <link rel="canonical" href="https://hopeever.org/" />
+  <link rel="icon" href="assets/images/common/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/scene.js"></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="loader" aria-hidden="true"><div><p>Hope Ever</p><div class="bar"></div></div></div>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Hope Ever Foundation — home">
+        <img src="assets/images/common/circular_logo-removebg-preview.png" alt="" width="46" height="46" />
+        <span>Hope Ever Foundation</span>
+      </a>
+      <nav class="primary-nav" id="primary-nav" aria-label="Main">
+        <a href="index.html" data-nav="home">Home</a>
+        <a href="about.html" data-nav="about">About Us</a>
+        <a href="projects.html" data-nav="projects">Projects</a>
+        <a href="programs.html" data-nav="programs">Programs &amp; Initiatives</a>
+        <a href="gallery.html" data-nav="gallery">Gallery</a>
+        <a href="contact.html" data-nav="contact">Contact Us</a>
+      </nav>
+      <div class="header-actions">
+        <button class="sound-toggle" type="button" aria-pressed="false" aria-label="Ambient sound"><i></i><i></i><i></i><i></i></button>
+        <a class="btn btn--solid" href="contact.html?subject=Donation" data-donate>Donate</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Hope Ever Foundation · Since 2012</p>
+        <h1 class="split-words">Rooted in communities. Growing <em>hope.</em></h1>
+        <p class="lead reveal">Empowering marginalized communities through sustainable livelihoods, education and dignity — across 14 districts of Tamil Nadu.</p>
+        <div class="btn-row reveal" style="--d:0.16s">
+          <a class="btn btn--solid" href="contact.html?subject=Donation" data-donate>Donate now</a>
+          <a class="btn" href="#impact">Our impact</a>
+        </div>
+      </div>
+      <span class="scroll-cue" aria-hidden="true">Scroll</span>
+    </section>
+
+    <section class="section section--tall" aria-labelledby="who">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">Who we are</p>
+          <h2 id="who" class="reveal">A decade of <em>community-driven</em> impact</h2>
+        </div>
+        <div class="grid">
+          <div class="panel reveal">
+            <p>Hope Ever Foundation is a registered non-profit established in 2012 under the Indian Trust Act, 1882. For over a decade we have worked in Tamil Nadu to empower Scheduled Castes, Scheduled Tribes, women and youth through sustainable livelihoods, education, child rights and environmental conservation — combining grassroots engagement with evidence-based planning and strong institutional partnerships.</p>
+          </div>
+          <div class="grid grid-2" style="gap:1rem">
+            <div class="panel reveal" style="--d:0.08s"><span class="num">Mission</span><p>To raise awareness and build community capacity for environmental conservation and economic self-reliance.</p></div>
+            <div class="panel reveal" style="--d:0.16s"><span class="num">Vision</span><p>To ensure sustainable livelihoods for marginalized populations through eco-friendly practices such as organic agriculture and renewable energy.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact" aria-labelledby="impact-h">
+      <div class="container">
+        <p class="eyebrow">Impact numbers</p>
+        <h2 id="impact-h" class="reveal">What we have built <em>together</em></h2>
+        <div class="stats">
+          <div class="stat reveal" style="--d:0.00s"><strong data-count="450" data-suffix="+">0+</strong><span>Youth trained in skill development</span></div>
+          <div class="stat reveal" style="--d:0.08s"><strong data-count="200" data-suffix="+">0+</strong><span>Farmers transitioned to organic farming</span></div>
+          <div class="stat reveal" style="--d:0.16s"><strong data-count="20" data-suffix="+">0+</strong><span>Villages with Child Rights Clubs</span></div>
+          <div class="stat reveal" style="--d:0.24s"><strong data-count="500" data-suffix="+">0+</strong><span>SC/ST youth trained</span></div>
+          <div class="stat reveal" style="--d:0.32s"><strong data-count="100" data-suffix="+">0+</strong><span>Healthcare (GDA) trainees since 2020</span></div>
+          <div class="stat reveal" style="--d:0.40s"><strong data-count="300" data-suffix="+">0+</strong><span>Women trained in trades &amp; enterprise</span></div>
+          <div class="stat reveal" style="--d:0.48s"><strong data-count="450" data-suffix="+">0+</strong><span>Women entrepreneurs supported</span></div>
+          <div class="stat reveal" style="--d:0.56s"><strong data-count="14" data-suffix="">0</strong><span>Districts covered across Tamil Nadu</span></div>
+          <div class="stat reveal" style="--d:0.64s"><strong data-count="13" data-suffix="+">0+</strong><span>Years of operation</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="prog-h">
+      <div class="container">
+        <div class="split" style="align-items:end">
+          <div>
+            <p class="eyebrow">What we do</p>
+            <h2 id="prog-h" class="reveal">Five branches, <em>one root</em></h2>
+          </div>
+          <p class="muted reveal measure">From grassroots research to skill training and livelihood development, every program grows from the same commitment: communities at the centre of everything we do.</p>
+        </div>
+        <ul class="program-list">
+          <li class="reveal" style="--d:0.00s"><a href="programs.html#outreach"><span class="n">01</span><span class="t">Community Outreach &amp; Awareness</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+          <li class="reveal" style="--d:0.08s"><a href="programs.html#livelihoods"><span class="n">02</span><span class="t">Livelihood Promotion &amp; Rural Development</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+          <li class="reveal" style="--d:0.16s"><a href="programs.html#skills"><span class="n">03</span><span class="t">Skill Development &amp; Employability</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+          <li class="reveal" style="--d:0.24s"><a href="programs.html#women"><span class="n">04</span><span class="t">Women &amp; Community Empowerment</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+          <li class="reveal" style="--d:0.32s"><a href="programs.html#research"><span class="n">05</span><span class="t">Research, Capacity Building &amp; Participatory Planning</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="partners-h">
+      <div class="container">
+        <p class="eyebrow">Partnerships</p>
+        <h2 id="partners-h" class="reveal">Growing with <a href="about.html#partners" style="text-decoration:none"><em>our partners &rarr;</em></a></h2>
+      </div>
+      <div class="marquee">
+        <div class="marquee-track">
+            <a class="partner" href="https://niti.gov.in/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/niti-aayog.png" alt="NITI Aayog" loading="lazy" /></a>
+            <a class="partner" href="https://www.nabard.org/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/nabard.png" alt="NABARD" loading="lazy" /></a>
+            <a class="partner" href="https://tahdco.com/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/tahdco.png" alt="TAHDCO" loading="lazy" /></a>
+            <a class="partner" href="https://nsdcindia.org/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/nsdc.png" alt="NSDC" loading="lazy" /></a>
+            <a class="partner" href="https://asci.org.in/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/asci.png" alt="ASCI" loading="lazy" /></a>
+            <a class="partner" href="https://ediindia.org/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/edii.png" alt="EDII" loading="lazy" /></a>
+            <a class="partner" href="https://ayush.gov.in/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/ministry-of-ayush.png" alt="Ministry of AYUSH" loading="lazy" /></a>
+            <a class="partner" href="https://handicrafts.nic.in/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/dc-handicrafts.png" alt="DC Handicrafts" loading="lazy" /></a>
+            <a class="partner" href="https://nmpb.nic.in/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/nmpb-medicine.png" alt="National Medicinal Plants Board" loading="lazy" /></a>
+            <a class="partner" href="https://tribal.nic.in/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/ministry-of-tribal-welfare.png" alt="Ministry of Tribal Affairs" loading="lazy" /></a>
+            <a class="partner" href="https://www.ariseinvest.com/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/arise-investment-pvt.png" alt="Arise Investments" loading="lazy" /></a>
+            <a class="partner" href="https://sscgj.in/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/scgj.png" alt="Skill Council for Green Jobs" loading="lazy" /></a>
+            <a class="partner" href="https://cecowor.org/" target="_blank" rel="noopener noreferrer"><img src="assets/images/partners/cecowor.png" alt="CECOWOR" loading="lazy" /></a>
+            <a class="partner" href="https://niti.gov.in/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/niti-aayog.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://www.nabard.org/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/nabard.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://tahdco.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/tahdco.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://nsdcindia.org/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/nsdc.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://asci.org.in/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/asci.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://ediindia.org/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/edii.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://ayush.gov.in/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/ministry-of-ayush.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://handicrafts.nic.in/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/dc-handicrafts.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://nmpb.nic.in/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/nmpb-medicine.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://tribal.nic.in/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/ministry-of-tribal-welfare.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://www.ariseinvest.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/arise-investment-pvt.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://sscgj.in/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/scgj.png" alt="" loading="lazy" /></a>
+            <a class="partner" href="https://cecowor.org/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="assets/images/partners/cecowor.png" alt="" loading="lazy" /></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tall cta" aria-labelledby="cta-h">
+      <div class="container">
+        <p class="eyebrow">Get involved</p>
+        <h2 id="cta-h" class="reveal">Every seed you plant <em>grows a future</em></h2>
+        <p class="lead reveal" style="margin:1.6rem auto 0">Donate, volunteer or partner with us to extend our reach across Tamil Nadu.</p>
+        <div class="btn-row reveal">
+          <a class="btn btn--solid" href="contact.html?subject=Donation" data-donate>Donate now</a>
+          <a class="btn" href="contact.html?subject=Volunteer">Volunteer</a>
+          <a class="btn" href="contact.html?subject=Partnership">Partner with us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="big-word" aria-hidden="true">Hope Ever</p>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/common/circular_logo-removebg-preview.png" alt="Hope Ever Foundation logo" width="64" height="64" loading="lazy" />
+        <p>Empowering marginalized communities through sustainable livelihoods, education, and dignity.</p>
+        <p class="muted" style="font:.85rem var(--sans);margin-top:1rem">Reg. No. 63/12 · Indian Trust Act, 1882</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="programs.html">Programs &amp; Initiatives</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><p>No. 12, Gandhi Nagar 3rd Street, Adyar, Chennai, Tamil Nadu 600020, India</p></li>
+          <li><a href="mailto:contact@hopeever.org">contact@hopeever.org</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Follow</h2>
+        <div class="socials">
+          <a href="https://www.facebook.com/p/Hope-Ever-Foundation-100079969281675/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="assets/images/icons/facebook.svg" alt="" /></a>
+          <a href="https://www.justdial.com/Chennai/Hope-Ever-Foundation-Charitable-Trust-Nesapakkam/044PXX44-XX44-240926172728-J3T9_BZDET" target="_blank" rel="noopener noreferrer" aria-label="Justdial listing"><img src="assets/images/icons/phone.svg" alt="" /></a>
+          <a href="https://worldsearch.co.in/GetBusinessDetail/HOPE-EVER-FOUNDATION" target="_blank" rel="noopener noreferrer" aria-label="WorldSearch listing"><img src="assets/images/icons/worldsearch.svg" alt="" /></a>
+        </div>
+        <p style="margin-top:1.2rem"><a class="btn" href="contact.html?subject=Donation" data-donate>Support us</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span class="year">2026</span> Hope Ever Foundation. All rights reserved.</p>
+        <p><a href="docs/terms-and-conditions.pdf" target="_blank" rel="noopener">Terms &amp; Conditions</a> · <a href="docs/privacy-policy.pdf" target="_blank" rel="noopener">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="donate" class="donate" aria-labelledby="donate-title">
+    <div class="panel">
+      <button class="close" type="button" aria-label="Close">&#10005;</button>
+      <p class="eyebrow">Support our work</p>
+      <h2 id="donate-title">Plant a seed of <em>hope</em></h2>
+      <p>Your gift funds skill training, organic farming, child-rights awareness and welfare outreach across 14 districts of Tamil Nadu.</p>
+      <form action="contact.html" method="get">
+        <input type="hidden" name="subject" value="Donation" />
+        <fieldset class="amounts">
+          <legend class="visually-hidden">Choose an amount</legend>
+          <label><input type="radio" name="amount" value="1000" /><span>&#8377;1,000</span></label>
+          <label><input type="radio" name="amount" value="2500" checked /><span>&#8377;2,500</span></label>
+          <label><input type="radio" name="amount" value="5000" /><span>&#8377;5,000</span></label>
+          <label><input type="radio" name="amount" value="10000" /><span>&#8377;10,000</span></label>
+        </fieldset>
+        <button class="btn btn--solid" type="submit">Continue &rarr;</button>
+      </form>
+      <p class="note">Hope Ever Foundation is a registered trust recognised under Sections 12AA and 80G of the Income Tax Act. Our team will reply with payment details and your tax-exemption receipt.</p>
+    </div>
+  </dialog>
+</body>
+</html>
