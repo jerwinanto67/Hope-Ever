@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us — Hope Ever Foundation</title>
+  <meta name="description" content="Contact Hope Ever Foundation for partnerships, volunteering, donations, media and general inquiries." />
+  <meta name="theme-color" content="#0d2727" />
+  <meta property="og:title" content="Contact Us — Hope Ever Foundation" />
+  <meta property="og:description" content="Contact Hope Ever Foundation for partnerships, volunteering, donations, media and general inquiries." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://hopeever.org/assets/images/common/circular_logo-removebg-preview.png" />
+  <link rel="canonical" href="https://hopeever.org/contact.html" />
+  <link rel="icon" href="assets/images/common/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+  <script src="js/main.js" defer></script>
+  <script type="module" src="js/scene.js"></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="loader" aria-hidden="true"><div><p>Hope Ever</p><div class="bar"></div></div></div>
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Hope Ever Foundation — home">
+        <img src="assets/images/common/circular_logo-removebg-preview.png" alt="" width="46" height="46" />
+        <span>Hope Ever Foundation</span>
+      </a>
+      <nav class="primary-nav" id="primary-nav" aria-label="Main">
+        <a href="index.html" data-nav="home">Home</a>
+        <a href="about.html" data-nav="about">About Us</a>
+        <a href="projects.html" data-nav="projects">Projects</a>
+        <a href="programs.html" data-nav="programs">Programs &amp; Initiatives</a>
+        <a href="gallery.html" data-nav="gallery">Gallery</a>
+        <a href="contact.html" data-nav="contact">Contact Us</a>
+      </nav>
+      <div class="header-actions">
+        <button class="sound-toggle" type="button" aria-pressed="false" aria-label="Ambient sound"><i></i><i></i><i></i><i></i></button>
+        <a class="btn btn--solid" href="contact.html?subject=Donation" data-donate>Donate</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="breadcrumb"><a href="index.html">Home</a> / Contact Us</p>
+        <p class="eyebrow">Contact us</p>
+        <h1 class="split-words">Let's grow <em>something together</em></h1>
+        <p class="lead reveal" style="margin-top:1.6rem">Reach out for partnership opportunities, volunteering, donations, media requests or any general query.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:2rem">
+      <div class="container split">
+        <form id="contact-form" class="panel form reveal" action="https://api.web3forms.com/submit" method="POST">
+          <h2 style="font-size:var(--step-2)">Send a message</h2>
+          <!-- Web3Forms access key for contact@hopeever.org (public by design) -->
+          <input type="hidden" name="access_key" value="92aceb5c-0b7c-4af2-94e7-28e64e1dadab" />
+          <input type="hidden" name="from_name" value="hopeever.org website" />
+          <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" autocomplete="name" required maxlength="120" /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="160" /></div>
+          <div class="field"><label for="phone">Phone <span class="muted">(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="20" /></div>
+          <div class="field"><label for="subject">Subject</label>
+            <select id="subject" name="subject">
+              <option>Partnership</option><option>Volunteer</option><option>Donation</option><option>Media</option><option selected>General</option>
+            </select>
+          </div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" required maxlength="4000"></textarea></div>
+          <button class="btn btn--solid" type="submit" style="justify-self:start">Send message &rarr;</button>
+          <p id="form-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="panel reveal" style="--d:.1s" aria-labelledby="details-h">
+          <h2 id="details-h" style="font-size:var(--step-2)">Contact details</h2>
+          <ul class="contact-list">
+            <li><strong>Address</strong>No. 12, Gandhi Nagar 3rd Street, Adyar, Chennai, Tamil Nadu 600020, India</li>
+            <li><strong>Email</strong><a href="mailto:contact@hopeever.org">contact@hopeever.org</a></li>
+            <li><strong>Facebook</strong><a href="https://www.facebook.com/p/Hope-Ever-Foundation-100079969281675/" target="_blank" rel="noopener noreferrer">Hope Ever Foundation</a></li>
+          </ul>
+          <iframe class="map" title="Map showing Hope Ever Foundation in Adyar, Chennai" src="https://maps.google.com/maps?q=Adyar%20Chennai&amp;z=13&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="big-word" aria-hidden="true">Hope Ever</p>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/common/circular_logo-removebg-preview.png" alt="Hope Ever Foundation logo" width="64" height="64" loading="lazy" />
+        <p>Empowering marginalized communities through sustainable livelihoods, education, and dignity.</p>
+        <p class="muted" style="font:.85rem var(--sans);margin-top:1rem">Reg. No. 63/12 · Indian Trust Act, 1882</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="programs.html">Programs &amp; Initiatives</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><p>No. 12, Gandhi Nagar 3rd Street, Adyar, Chennai, Tamil Nadu 600020, India</p></li>
+          <li><a href="mailto:contact@hopeever.org">contact@hopeever.org</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Follow</h2>
+        <div class="socials">
+          <a href="https://www.facebook.com/p/Hope-Ever-Foundation-100079969281675/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="assets/images/icons/facebook.svg" alt="" /></a>
+          <a href="https://www.justdial.com/Chennai/Hope-Ever-Foundation-Charitable-Trust-Nesapakkam/044PXX44-XX44-240926172728-J3T9_BZDET" target="_blank" rel="noopener noreferrer" aria-label="Justdial listing"><img src="assets/images/icons/phone.svg" alt="" /></a>
+          <a href="https://worldsearch.co.in/GetBusinessDetail/HOPE-EVER-FOUNDATION" target="_blank" rel="noopener noreferrer" aria-label="WorldSearch listing"><img src="assets/images/icons/worldsearch.svg" alt="" /></a>
+        </div>
+        <p style="margin-top:1.2rem"><a class="btn" href="contact.html?subject=Donation" data-donate>Support us</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span class="year">2026</span> Hope Ever Foundation. All rights reserved.</p>
+        <p><a href="docs/terms-and-conditions.pdf" target="_blank" rel="noopener">Terms &amp; Conditions</a> · <a href="docs/privacy-policy.pdf" target="_blank" rel="noopener">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="donate" class="donate" aria-labelledby="donate-title">
+    <div class="panel">
+      <button class="close" type="button" aria-label="Close">&#10005;</button>
+      <p class="eyebrow">Support our work</p>
+      <h2 id="donate-title">Plant a seed of <em>hope</em></h2>
+      <p>Your gift funds skill training, organic farming, child-rights awareness and welfare outreach across 14 districts of Tamil Nadu.</p>
+      <form action="contact.html" method="get">
+        <input type="hidden" name="subject" value="Donation" />
+        <fieldset class="amounts">
+          <legend class="visually-hidden">Choose an amount</legend>
+          <label><input type="radio" name="amount" value="1000" /><span>&#8377;1,000</span></label>
+          <label><input type="radio" name="amount" value="2500" checked /><span>&#8377;2,500</span></label>
+          <label><input type="radio" name="amount" value="5000" /><span>&#8377;5,000</span></label>
+          <label><input type="radio" name="amount" value="10000" /><span>&#8377;10,000</span></label>
+        </fieldset>
+        <button class="btn btn--solid" type="submit">Continue &rarr;</button>
+      </form>
+      <p class="note">Hope Ever Foundation is a registered trust recognised under Sections 12AA and 80G of the Income Tax Act. Our team will reply with payment details and your tax-exemption receipt.</p>
+    </div>
+  </dialog>
+</body>
+</html>
