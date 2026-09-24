@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hopeever.org/sitemap.xml
