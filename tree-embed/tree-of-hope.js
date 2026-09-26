@@ -11,7 +11,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.169.0/+esm';
 import { mergeGeometries } from 'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/utils/BufferGeometryUtils.js/+esm';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/controls/OrbitControls.js/+esm';
 
-export function mountTree(container, { background = 0x0d2727, autoRotate = true, interactive = true, seed = 11 } = {}) {
+export function mountTree(container, { background = 0xf5f0e6, autoRotate = true, interactive = true, seed = 11 } = {}) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const low = container.clientWidth < 768 || (navigator.hardwareConcurrency || 4) <= 4;
 
@@ -26,15 +26,15 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
   container.append(canvas);
 
   const scene = new THREE.Scene();
-  if (background !== null) scene.fog = new THREE.FogExp2(background, 0.042);
+  if (background !== null) scene.fog = new THREE.FogExp2(background, 0.03);
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   camera.position.set(0, 6, 22);
 
-  scene.add(new THREE.HemisphereLight(0x5f9a8c, 0x0d2727, 1.1));
-  const rim = new THREE.DirectionalLight(0xeaae76, 2.2);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xcfc3a8, 1.6));
+  const rim = new THREE.DirectionalLight(0xfff1dc, 1.6);
   rim.position.set(-4, 10, -8);
   scene.add(rim);
-  const glow = new THREE.PointLight(0xeaae76, 30, 14, 1.6);
+  const glow = new THREE.PointLight(0xffe2b8, 12, 14, 1.6);
   glow.position.set(0, 7, 1);
   scene.add(glow);
 
@@ -49,7 +49,7 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
     const pts = [start];
     let p = start, d = dir.clone();
     for (let i = 0; i < 3; i++) {
-      d.add(new V((rnd() - 0.5) * 0.4, isRoot ? -0.05 : (rnd() - 0.2) * 0.15, (rnd() - 0.5) * 0.4)).normalize();
+      d.add(new V((rnd() - 0.5) * 0.4, isRoot ? -0.02 : (rnd() - 0.2) * 0.15, (rnd() - 0.5) * 0.4)).normalize();
       p = p.clone().addScaledVector(d, len / 3);
       pts.push(p);
     }
@@ -74,26 +74,26 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
     for (let k = 0; k < n; k++) {
       const a = (k / n) * Math.PI * 2 + rnd() * 1.5;
       const spread = isRoot ? 0.6 : 0.55 + rnd() * 0.35;
-      const nd = d.clone().add(new V(Math.cos(a) * spread, isRoot ? -0.15 : 0.25, Math.sin(a) * spread)).normalize();
+      const nd = d.clone().add(new V(Math.cos(a) * spread, isRoot ? -0.03 : 0.25, Math.sin(a) * spread)).normalize();
       branch(end, nd, len * (0.7 + rnd() * 0.12), radius * 0.62, depth - 1, isRoot);
     }
   }
   branch(new V(0, -0.3, 0), new V(0, 1, 0), 3.4, 0.34, low ? 5 : 6);
   for (let r = 0; r < 5; r++) {
     const a = (r / 5) * Math.PI * 2 + rnd();
-    branch(new V(0, 0.4, 0), new V(Math.cos(a), -0.35, Math.sin(a)).normalize(), 2.2, 0.2, 2, true);
+    branch(new V(0, 0.4, 0), new V(Math.cos(a), -0.06, Math.sin(a)).normalize(), 2.2, 0.2, 2, true); // surface roots
   }
 
   const tree = new THREE.Group();
   tree.add(new THREE.Mesh(
     mergeGeometries(tubes),
-    new THREE.MeshStandardMaterial({ color: 0x2b4a42, roughness: 0.8, metalness: 0.15, emissive: 0x0b221d }),
+    new THREE.MeshStandardMaterial({ color: 0x5a4a3a, roughness: 0.9, metalness: 0 }),
   ));
   tubes.forEach(t => t.dispose());
 
   // ---- Glowing points: leaves/fruit sway, pollen rises ----
   const pointsMat = (rise, colA, colB) => new THREE.ShaderMaterial({
-    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    transparent: true, depthWrite: false, blending: THREE.NormalBlending, // light background: additive glow would wash out
     uniforms: {
       uTime: { value: 0 }, uGrow: { value: 0 }, uPixel: { value: dpr }, uRise: { value: rise },
       uA: { value: new THREE.Color(colA) }, uB: { value: new THREE.Color(colB) },
@@ -117,10 +117,11 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
       }`,
     fragmentShader: `
       uniform vec3 uA, uB;
+    uniform float uRise;
       varying float vMix, vAlpha;
       void main() {
         float a = smoothstep(.5, 0., length(gl_PointCoord - .5));
-        gl_FragColor = vec4(mix(uA, uB, step(.86, vMix)) * 1.5, a * a * vAlpha);
+        gl_FragColor = vec4(mix(uA, uB, step(.95, vMix)), smoothstep(0., .6, a) * vAlpha * mix(.85, .35, uRise));
       }`,
   });
 
@@ -131,7 +132,7 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
       place(v, i);
       pos.set([v.x, v.y, v.z], i * 3);
       rand[i] = rnd();
-      size[i] = sizeMin + rnd() * (sizeMax - sizeMin) + (rand[i] > 0.86 ? sizeMax : 0); // fruit = bigger
+      size[i] = sizeMin + rnd() * (sizeMax - sizeMin) + (rand[i] > 0.95 ? sizeMax * .5 : 0); // fruit = bigger
     }
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
@@ -142,20 +143,20 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
 
   const leaves = points(low ? 3200 : 8000, (v, i) => {
     v.randomDirection().multiplyScalar(0.75 * Math.cbrt(rnd())).add(tips[i % tips.length]);
-  }, 0, 0x5fd39a, 0xeaae76, 1.5, 4);
+  }, 0, 0x2f8f5f, 0xd4872a, 1.2, 3.2);
   tree.add(leaves);
 
   const pollen = points(low ? 350 : 900, v => {
     const a = rnd() * Math.PI * 2, r = 1 + rnd() * 10;
     v.set(Math.cos(a) * r, rnd() * 14, Math.sin(a) * r);
-  }, 1, 0xeaae76, 0xffffff, 1, 2.5);
+  }, 1, 0xc9a36b, 0x6fa88a, .8, 1.8);
 
   const ground = new THREE.Mesh(
     new THREE.CircleGeometry(12, 48),
     new THREE.ShaderMaterial({
       transparent: true, depthWrite: false,
       vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }',
-      fragmentShader: 'varying vec2 vUv; void main(){ float d = length(vUv - .5) * 2.; gl_FragColor = vec4(mix(vec3(.92,.68,.46), vec3(.06,.43,.34), smoothstep(0.,.5,d)), smoothstep(1.,0.,d) * .28); }',
+      fragmentShader: 'varying vec2 vUv; void main(){ float d = length(vUv - .5) * 2.; gl_FragColor = vec4(mix(vec3(.84,.86,.78), vec3(.96,.94,.9), smoothstep(0.,.8,d)), smoothstep(1.,.45,d) * .96); }',
     }),
   );
   ground.rotation.x = -Math.PI / 2;
@@ -176,6 +177,7 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
   const resize = () => {
     const w = container.clientWidth, h = container.clientHeight || 1;
     camera.aspect = w / h;
+    camera.fov = camera.aspect < 1 ? 40 / Math.max(camera.aspect, .5) : 40; // fit the whole tree in tall boxes
     camera.updateProjectionMatrix();
     renderer.setSize(w, h, false);
   };
@@ -195,7 +197,7 @@ export function mountTree(container, { background = 0x0d2727, autoRotate = true,
     const t = clock.getElapsedTime();
     grow(reduce ? 1 : 1 - Math.pow(1 - Math.min(t / 3.2, 1), 3));
     if (!reduce) {
-      glow.intensity = 26 + Math.sin(t * 1.3) * 6;
+      glow.intensity = 10 + Math.sin(t * 1.3) * 3;
       leaves.material.uniforms.uTime.value = pollen.material.uniforms.uTime.value = t;
     }
     controls.update();
