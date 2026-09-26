@@ -1,17 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "redirects": [
-    {
-      "source": "/docs/:path*",
-      "destination": "https://hopeever.org/docs/:path*",
-      "permanent": false
-    },
-    {
-      "source": "/projects/:path*",
-      "destination": "https://hopeever.org/projects/:path*",
-      "permanent": false
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

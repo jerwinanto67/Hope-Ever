@@ -1,0 +1,94 @@
+/* Card Menu: styles. Theme it by overriding the custom properties on .card-menu. */
+.card-menu {
+  --cm-bg: #cfcac0;          /* paper colour behind the cards */
+  --cm-ink: #1d1d1b;         /* text */
+  --cm-muted: #55524b;       /* hint + card subtitle */
+  --cm-accent: #d4872a;      /* number badge on the current page's card */
+  --cm-frame: #f4f1ea;       /* card frame */
+  --cm-card-w: clamp(190px, 24vw, 300px);
+  --cm-gap: 28px;            /* read by card-menu.js too */
+  --cm-title-font: 'Instrument Serif', Georgia, serif;
+  --cm-font: system-ui, sans-serif;
+
+  position: fixed; inset: 0;
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: 0; border-radius: 0;
+  display: none; flex-direction: column; overflow: hidden;
+  color: var(--cm-ink); font-family: var(--cm-font);
+  /* warm paper: soft diagonal light + fine grain (SVG noise) */
+  background:
+    linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    var(--cm-bg);
+}
+.card-menu[open] { display: flex; animation: cm-in .5s ease both; }
+.card-menu::backdrop { background: var(--cm-bg, #cfcac0); }
+@keyframes cm-in { from { opacity: 0; } }
+
+.cm-top, .cm-bottom {
+  position: relative; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 14px clamp(16px, 4vw, 48px);
+}
+.cm-close {
+  min-width: 64px; min-height: 40px; margin-left: auto; padding: 4px 16px;
+  border: 0; border-radius: 999px; background: #fff; color: var(--cm-ink);
+  font: 400 1.4rem/1 var(--cm-font); cursor: pointer;
+}
+.cm-hint { margin: 0; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cm-muted); }
+
+/* The rail: cards are absolutely placed and moved in 3D by card-menu.js */
+.cm-rail { position: relative; flex: 1; perspective: 1400px; transform-style: preserve-3d; touch-action: pan-y; cursor: grab; user-select: none; }
+.cm-rail:active { cursor: grabbing; }
+.cm-card {
+  position: absolute; left: calc(50% - var(--cm-card-w) / 2); top: 50%;
+  width: var(--cm-card-w); margin-top: calc(var(--cm-card-w) * -.78);
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  color: var(--cm-ink); text-decoration: none; transform-style: preserve-3d; will-change: transform;
+  animation: cm-card-in .7s cubic-bezier(.2, .8, .2, 1) both;
+}
+.cm-card:nth-child(2) { animation-delay: .05s; } .cm-card:nth-child(3) { animation-delay: .1s; }
+.cm-card:nth-child(4) { animation-delay: .15s; } .cm-card:nth-child(5) { animation-delay: .2s; }
+.cm-card:nth-child(6) { animation-delay: .25s; } .cm-card:nth-child(7) { animation-delay: .3s; }
+.cm-card:nth-child(n+8) { animation-delay: .35s; }
+@keyframes cm-card-in { from { opacity: 0; margin-top: calc(var(--cm-card-w) * -.78 + 80px); } }
+
+/* Poster: framed picture + number badge + big serif title */
+.cm-poster {
+  position: relative; display: block; width: 100%; aspect-ratio: 3 / 4;
+  padding: 10px 10px 58px; background: var(--cm-frame);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .08), 0 18px 40px -12px rgba(0, 0, 0, .35);
+  transition: transform .25s ease-out, box-shadow .3s; transform-style: preserve-3d;
+}
+.cm-art { display: block; width: 100%; height: 100%; overflow: hidden; background: #d8d3c9; }
+.cm-art img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.cm-num {
+  position: absolute; top: 18px; right: 18px; width: 44px; height: 44px;
+  display: grid; place-items: center; border-radius: 50%; border: 1px solid #fff;
+  color: #fff; font-size: .75rem; letter-spacing: .1em; transform: translateZ(20px);
+}
+.cm-title {
+  position: absolute; left: 0; right: 0; bottom: 10px; text-align: center;
+  font: 400 clamp(1.8rem, 3vw, 2.6rem)/1 var(--cm-title-font);
+  text-transform: uppercase; letter-spacing: -.01em; transform: translateZ(14px);
+}
+.cm-line { font-size: .8rem; letter-spacing: .06em; color: var(--cm-muted); text-align: center; opacity: 0; transition: opacity .3s; }
+.cm-card.cm-center .cm-line { opacity: 1; }
+.cm-card.cm-center .cm-poster { box-shadow: 0 2px 2px rgba(0, 0, 0, .08), 0 34px 60px -14px rgba(0, 0, 0, .45); }
+.cm-card[aria-current="page"] .cm-num { background: var(--cm-accent); border-color: var(--cm-accent); color: #1a0f02; }
+.cm-card:focus-visible { outline: none; }
+.cm-card:focus-visible .cm-poster { outline: 2px solid var(--cm-ink); outline-offset: 6px; }
+
+/* Choosing a card: it swells toward the viewer while the rest fall away */
+.card-menu.cm-leaving .cm-card:not(.cm-go) { opacity: 0 !important; transition: opacity .3s; }
+.card-menu.cm-leaving .cm-go .cm-poster { transform: scale(1.35) translateZ(120px) !important; transition: transform .5s cubic-bezier(.6, 0, .2, 1); }
+.card-menu.cm-leaving { animation: cm-out .52s ease forwards; }
+@keyframes cm-out { 70% { opacity: 1; } to { opacity: 0; } }
+
+/* The page shrinks toward the screen centre while the menu opens (elements from data-zoom) */
+.cm-zoom-target { transition: transform .45s cubic-bezier(.6, 0, .2, 1), opacity .45s, border-radius .45s; }
+html.cm-zoomed .cm-zoom-target { transform: scale(.42); opacity: 0; border-radius: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card-menu, .card-menu *, .cm-zoom-target { animation: none !important; transition: none !important; }
+}

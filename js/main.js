@@ -4,13 +4,9 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ---- Images: fall back to the live site until assets/ is copied alongside ----
-const fallback = img => {
-  const src = img.getAttribute && img.getAttribute('src');
-  if (img.tagName === 'IMG' && src && src.startsWith('assets/')) img.src = 'https://hopeever.org/' + src;
-};
-document.addEventListener('error', e => fallback(e.target), true);
-[...document.images].filter(i => i.complete && !i.naturalWidth).forEach(fallback); // failed before this script ran
+// Razorpay Payment Button ID (public, starts with "pl_"): Razorpay Dashboard → Payment Button → Create.
+// Empty = the Donate pop-up is an enquiry form only.
+const RAZORPAY_BUTTON_ID = '';
 
 // ---- Loader: hide once the 3D scene paints (or give up after 3.5s) ----
 let loaded = false;
@@ -27,11 +23,6 @@ onScroll();
 const page = document.body.dataset.page;
 $$('.primary-nav a').forEach(a => { if (a.dataset.nav === page) a.setAttribute('aria-current', 'page'); });
 
-const toggle = $('.nav-toggle'), nav = $('.primary-nav');
-const setNav = open => { toggle.setAttribute('aria-expanded', open); nav.classList.toggle('is-open', open); document.body.style.overflow = open ? 'hidden' : ''; };
-toggle.addEventListener('click', () => setNav(toggle.getAttribute('aria-expanded') !== 'true'));
-nav.addEventListener('click', e => { if (e.target.closest('a')) setNav(false); });
-addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { setNav(false); toggle.focus(); } });
 
 // ---- Split headline words for the intro animation ----
 $$('.split-words').forEach(el => {
@@ -102,41 +93,56 @@ if (lb) {
   lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
 }
 
-// ---- Donate dialog (hands off to the contact form with subject = Donation) ----
+// ---- Donate dialog: Web3Forms enquiry, plus Razorpay when configured ----
 const donate = $('#donate');
 if (donate) {
-  $$('[data-donate]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); donate.showModal(); }));
+  let rzp = false;
+  document.addEventListener('click', e => {
+    if (!e.target.closest('[data-donate]')) return;
+    e.preventDefault();
+    if (RAZORPAY_BUTTON_ID && !rzp) { // the button script only runs when added as a real <script>
+      rzp = true;
+      const sc = document.createElement('script');
+      sc.src = 'https://checkout.razorpay.com/v1/payment-button.js';
+      sc.async = true;
+      sc.dataset.payment_button_id = RAZORPAY_BUTTON_ID;
+      $('.rzp-slot', donate).append(sc);
+      $('.pay', donate).hidden = false;
+    }
+    $('#card-menu')?.open && $('#card-menu').close();
+    donate.showModal();
+  });
   $('.close', donate).onclick = () => donate.close();
   donate.addEventListener('click', e => { if (e.target === donate) donate.close(); });
 }
 
-// ---- Contact form: prefill from query, submit to Web3Forms without leaving the page ----
-const form = $('#contact-form');
-if (form) {
-  const q = new URLSearchParams(location.search), subj = q.get('subject'), amount = q.get('amount');
-  if (subj && [...form.subject.options].some(o => o.value === subj)) form.subject.value = subj;
-  if (amount && /^\d{1,8}$/.test(amount)) form.message.value = `I would like to support Hope Ever Foundation with a donation of ₹${(+amount).toLocaleString('en-IN')}. Please share payment details and the 80G receipt process.`;
+// ---- Contact page: preselect the subject from ?subject= ----
+const contactForm = $('#contact-form');
+const subj = new URLSearchParams(location.search).get('subject');
+if (contactForm && subj && [...contactForm.subject.options].some(o => o.value === subj)) contactForm.subject.value = subj;
 
-  const fb = $('#form-feedback'), btn = $('button[type=submit]', form);
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    if (!form.reportValidity()) return;
-    btn.disabled = true;
-    fb.className = 'form-feedback';
-    fb.textContent = 'Sending…';
-    try {
-      const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
-      const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.message || 'Submission failed');
-      form.reset();
-      fb.className = 'form-feedback ok';
-      fb.textContent = 'Thank you — your message has been sent. We will get back to you soon.';
-    } catch (err) {
-      fb.className = 'form-feedback err';
-      fb.textContent = 'Sorry, something went wrong. Please email contact@hopeever.org directly.';
-    } finally { btn.disabled = false; }
-  });
-}
+// ---- Forms: submit to Web3Forms without leaving the page (contact + donate) ----
+document.addEventListener('submit', async e => {
+  const form = e.target;
+  if (form.id !== 'contact-form' && !form.classList.contains('w3f')) return;
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+  const fb = $('.form-feedback', form), btn = $('button[type=submit]', form);
+  btn.disabled = true;
+  fb.className = 'form-feedback';
+  fb.textContent = 'Sending…';
+  try {
+    const res = await fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.message || 'Submission failed');
+    form.reset();
+    fb.className = 'form-feedback ok';
+    fb.textContent = 'Thank you — your message has been sent. We will get back to you soon.';
+  } catch {
+    fb.className = 'form-feedback err';
+    fb.textContent = 'Sorry, something went wrong. Please email contact@hopeever.org directly.';
+  } finally { btn.disabled = false; }
+});
 
 // ---- Ambient sound (generated, off by default) ----
 const soundBtn = $('.sound-toggle');
