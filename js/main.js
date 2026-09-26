@@ -4,8 +4,12 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Razorpay Payment Button ID (public, starts with "pl_"): Razorpay Dashboard → Payment Button → Create.
-// Empty = the Donate pop-up is an enquiry form only.
+// ---- Donation settings: fill in when the organisation provides them ----
+// Bank/UPI QR image from the bank or UPI app, e.g. 'assets/images/donate/upi-qr.png'. Shown in the Donate pop-up.
+const DONATE_QR_IMAGE = '';
+// UPI ID, e.g. 'hopeever@sbi'. Without an image, the site draws the QR from this; on phones it also opens the UPI app.
+const UPI_ID = '';
+// Razorpay Payment Button ID (starts with "pl_"). Empty = no online card payments.
 const RAZORPAY_BUTTON_ID = '';
 
 // ---- Loader: hide once the 3D scene paints (or give up after 3.5s) ----
@@ -112,6 +116,25 @@ if (donate) {
     $('#card-menu')?.open && $('#card-menu').close();
     donate.showModal();
   });
+  // Bank / UPI QR: hidden until DONATE_QR_IMAGE or UPI_ID is set.
+  if (DONATE_QR_IMAGE || UPI_ID) {
+    const qr = $('.qr', donate), img = $('.qr-img', qr);
+    const upiLink = UPI_ID && `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent('Hope Ever Foundation')}&cu=INR`;
+    if (UPI_ID) {
+      $('.qr-upi', qr).textContent = 'UPI ID: ' + UPI_ID;
+      const app = $('.qr-app', qr);
+      app.href = upiLink;
+      app.hidden = !matchMedia('(pointer: coarse)').matches; // UPI links only open on phones
+    }
+    if (DONATE_QR_IMAGE) img.src = DONATE_QR_IMAGE;
+    else { // draw the QR from the UPI ID
+      const sc = document.createElement('script');
+      sc.src = 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js';
+      sc.onload = () => { const q = qrcode(0, 'M'); q.addData(upiLink); q.make(); img.src = q.createDataURL(6, 2); };
+      document.head.append(sc);
+    }
+    qr.hidden = false;
+  }
   $('.close', donate).onclick = () => donate.close();
   donate.addEventListener('click', e => { if (e.target === donate) donate.close(); });
 }
