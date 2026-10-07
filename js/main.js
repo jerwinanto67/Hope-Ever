@@ -12,11 +12,10 @@ const UPI_ID = '';
 // Razorpay Payment Button ID (starts with "pl_"). Empty = no online card payments.
 const RAZORPAY_BUTTON_ID = '';
 
-// ---- Loader: hide once the 3D scene paints (or give up after 3.5s) ----
-let loaded = false;
-const done = () => { if (!loaded) { loaded = true; document.body.classList.add('is-loaded'); } };
-addEventListener('scene-ready', done);
-setTimeout(() => { if (!loaded) document.documentElement.classList.add('no-webgl'); done(); }, 3500);
+// ---- Loader: hide once the page has loaded ----
+const done = () => document.body.classList.add('is-loaded');
+document.readyState === 'complete' ? done() : addEventListener('load', done);
+setTimeout(done, 3500); // never trap the visitor behind the loader if something is slow
 
 // ---- Header ----
 const header = $('.site-header');
@@ -40,6 +39,28 @@ $$('.split-words').forEach(el => {
     } else el.replaceChild(wrap(n.cloneNode(true)), n);
   });
 });
+
+// ---- Client-editable content: js/content.js fills [data-render="stats"] and [data-render="team"] ----
+const el = (tag, cls, text) => { const n = document.createElement(tag); n.className = cls; if (text != null) n.textContent = text; return n; };
+const content = window.CONTENT || {};
+$('[data-render="stats"]')?.append(...(content.stats || []).map((s, i) => {
+  const box = el('div', 'stat reveal'), num = el('strong', '', '0' + (s.suffix || ''));
+  box.style.setProperty('--d', (i % 4) * 0.08 + 's');
+  num.dataset.count = String(s.number).replace(/,/g, '');
+  num.dataset.suffix = s.suffix || '';
+  box.append(num, el('span', '', s.label));
+  return box;
+}));
+$('[data-render="team"]')?.append(...(content.team || []).flatMap(g => {
+  const grid = el('div', 'people');
+  grid.append(...g.people.map(p => {
+    const card = el('div', 'person');
+    card.append(el('strong', '', p.name), el('span', '', p.role));
+    if (p.bio) card.append(el('p', 'bio', p.bio));
+    return card;
+  }));
+  return [el('p', 'group-title reveal', g.title), grid];
+}));
 
 // ---- Scroll reveal + counters ----
 const countUp = el => {

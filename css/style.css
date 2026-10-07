@@ -49,17 +49,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .skip-link:focus { top: 1rem; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* ---------- WebGL layer ---------- */
-#scene { position: fixed; inset: 0; z-index: 0; width: 100%; height: 100%; display: block; }
-.no-webgl #scene { display: none; }
-body::before { /* fallback + vignette under content */
-  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 60% 50% at 70% 35%, rgba(164, 103, 42, .16), transparent 70%),
-    radial-gradient(ellipse 80% 60% at 20% 90%, rgba(15, 110, 86, .12), transparent 70%);
-  opacity: 0; transition: opacity 1s;
-}
-.no-webgl body::before, body.no-webgl::before { opacity: 1; }
 .grain { display: none; /* removed for the clean light look */
   position: fixed; inset: -50%; z-index: 1; pointer-events: none; opacity: .07;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -242,10 +231,11 @@ h1 em, h2 em { font-style: italic; color: var(--gold); }
 [hidden] { display: none !important; }
 
 /* People */
-.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin: 1.2rem 0 3rem; }
-.person { background: var(--glass); padding: 1.4rem; }
+.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 1rem; margin: 1.2rem 0 3rem; } /* separate cards: any number of people leaves no empty cells */
+.person { background: var(--glass); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; }
 .person strong { display: block; font: 400 1.3rem/1.2 var(--serif); color: var(--heading); }
 .person span { font-size: .8rem; color: var(--copper); letter-spacing: .08em; }
+.person .bio { margin-top: .8rem; font-size: .9rem; line-height: 1.6; color: var(--mist-dim); }
 .group-title { font: 600 var(--step--1)/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--mist-dim); }
 
 /* Districts */
@@ -440,4 +430,3 @@ dialog[open] { animation: pop .5s var(--ease); }
 .qr-box img { width: 220px; height: 220px; image-rendering: pixelated; }
 .qr-upi { font-weight: 600; color: var(--heading); }
 .qr-app { margin-top: .6rem; }
-@media (max-width: 900px) { #scene { opacity: .35; } } /* keep text readable over the tree on narrow screens */

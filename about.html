@@ -17,16 +17,14 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/card-menu.css" />
-  <link rel="stylesheet" href="css/style.css?v=6" />
-  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
-  <script src="js/main.js?v=5" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=7" />
+  <script src="js/content.js?v=1" defer></script>
+  <script src="js/main.js?v=6" defer></script>
   <script src="js/card-menu.js" defer></script>
-  <script type="module" src="js/scene.js?v=6"></script>
 </head>
 <body data-page="about">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="loader" aria-hidden="true"><div><p>Hope Ever</p><div class="bar"></div></div></div>
-  <canvas id="scene" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
 
   <header class="site-header">
@@ -72,12 +70,7 @@
       <div class="container">
         <p class="eyebrow">Our leadership</p>
         <h2 id="team" class="reveal" style="margin-bottom:2.5rem">The minds behind <em>our mission</em></h2>
-        <p class="group-title reveal">Board Members</p>
-        <div class="people"><div class="person"><strong>Mrs. Grace Pramilan</strong><span>Managing Trustee</span></div><div class="person"><strong>Josephine</strong><span>Secretary</span></div><div class="person"><strong>Mr. Thangaraj</strong><span>Treasurer</span></div><div class="person"><strong>Mr. Sampath</strong><span>Trustee</span></div><div class="person"><strong>Mr. Kalaiselvi</strong><span>Trustee</span></div></div>
-        <p class="group-title reveal">Advisory Committee</p>
-        <div class="people"><div class="person"><strong>Selvanathan</strong><span>MSW</span></div><div class="person"><strong>Issac Pramilan</strong><span>Advisor</span></div><div class="person"><strong>A. Vimala</strong><span>RTD TR</span></div><div class="person"><strong>Murugeshwaran</strong><span>M.E</span></div></div>
-        <p class="group-title reveal">Consultant Team</p>
-        <div class="people"><div class="person"><strong>Dr. Vijayalakshmi</strong><span>PhD</span></div><div class="person"><strong>Dr. Vimudha</strong><span>Consultant</span></div><div class="person"><strong>Dr. Deepak</strong><span>CN</span></div><div class="person"><strong>Mr. N. Anandhan</strong><span>MSW</span></div></div>
+        <div data-render="team"></div>
       </div>
     </section>
 

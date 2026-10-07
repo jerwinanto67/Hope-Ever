@@ -1,11 +1,10 @@
 # Hope Ever Foundation — website
 
-Static site (plain HTML, CSS and JavaScript, no build step). The Tree of Hope 3D scene uses
-Three.js from the jsDelivr CDN.
+Static site (plain HTML, CSS and JavaScript, no build step).
 
 ## Run locally
 
-The 3D scene needs a web server; double-clicking the HTML files won't load it.
+Serve it rather than double-clicking the HTML files, so paths and fonts load as they do online.
 
 ```bash
 python -m http.server 5173
@@ -17,6 +16,12 @@ Then open http://localhost:5173.
 
 Import the repo in Vercel, choose the framework preset **Other**, and leave the build command empty.
 `404.html` is served automatically for unknown addresses.
+
+## Editing the team and numbers (no developer needed)
+
+Open `js/content.js` on GitHub, click the pencil icon, change the text, and commit. Vercel redeploys in about a minute.
+Add a person by copying one `{ name: '…', role: '…' },` line; remove one by deleting its line; add `bio: '…'` for a short bio.
+The page shows however many entries are listed. The instructions are at the top of the file.
 
 ## Settings
 
@@ -36,8 +41,8 @@ Import the repo in Vercel, choose the framework preset **Other**, and leave the 
 | `css/style.css` | Site styles |
 | `css/card-menu.css`, `js/card-menu.js` | 3D photo-card menu (the "Menu" button) |
 | `js/main.js` | Loader, reveal, counters, filters, lightbox, donate and contact forms, audio, cursor |
-| `js/scene.js` | Tree of Hope background scene; the camera follows the scroll |
-| `tree.html`, `tree-embed/` | The tree on its own, and a drop-in version for other websites |
+| `js/content.js` | **Editable content**: the team (About page) and impact numbers (Home page) |
+| `tree.html`, `tree-embed/` | The tree on its own, and a drop-in version for other websites (not used by the site pages) |
 
 ## To do
 

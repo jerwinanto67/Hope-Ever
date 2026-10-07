@@ -17,16 +17,14 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/card-menu.css" />
-  <link rel="stylesheet" href="css/style.css?v=6" />
-  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
-  <script src="js/main.js?v=5" defer></script>
+  <link rel="stylesheet" href="css/style.css?v=7" />
+  <script src="js/content.js?v=1" defer></script>
+  <script src="js/main.js?v=6" defer></script>
   <script src="js/card-menu.js" defer></script>
-  <script type="module" src="js/scene.js?v=6"></script>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="loader" aria-hidden="true"><div><p>Hope Ever</p><div class="bar"></div></div></div>
-  <canvas id="scene" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
 
   <header class="site-header">
@@ -75,17 +73,7 @@
       <div class="container">
         <p class="eyebrow">Impact numbers</p>
         <h2 id="impact-h" class="reveal">What we have built <em>together</em></h2>
-        <div class="stats">
-          <div class="stat reveal" style="--d:0.00s"><strong data-count="450" data-suffix="+">0+</strong><span>Youth trained in skill development</span></div>
-          <div class="stat reveal" style="--d:0.08s"><strong data-count="200" data-suffix="+">0+</strong><span>Farmers transitioned to organic farming</span></div>
-          <div class="stat reveal" style="--d:0.16s"><strong data-count="50" data-suffix="+">0+</strong><span>Villages with Child Rights Clubs</span></div>
-          <div class="stat reveal" style="--d:0.24s"><strong data-count="500" data-suffix="+">0+</strong><span>SC/ST youth trained</span></div>
-          <div class="stat reveal" style="--d:0.32s"><strong data-count="100" data-suffix="+">0+</strong><span>Healthcare (GDA) trainees since 2020</span></div>
-          <div class="stat reveal" style="--d:0.40s"><strong data-count="300" data-suffix="+">0+</strong><span>Women trained in trades &amp; enterprise</span></div>
-          <div class="stat reveal" style="--d:0.48s"><strong data-count="450" data-suffix="+">0+</strong><span>Women entrepreneurs supported</span></div>
-          <div class="stat reveal" style="--d:0.56s"><strong data-count="14" data-suffix="">0</strong><span>Districts covered across Tamil Nadu</span></div>
-          <div class="stat reveal" style="--d:0.64s"><strong data-count="13" data-suffix="+">0+</strong><span>Years of operation</span></div>
-        </div>
+        <div class="stats" data-render="stats"></div>
       </div>
     </section>
 
