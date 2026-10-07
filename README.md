@@ -19,9 +19,17 @@ Import the repo in Vercel, choose the framework preset **Other**, and leave the 
 
 ## Editing the team and numbers (no developer needed)
 
-Open `js/content.js` on GitHub, click the pencil icon, change the text, and commit. Vercel redeploys in about a minute.
-Add a person by copying one `{ name: '…', role: '…' },` line; remove one by deleting its line; add `bio: '…'` for a short bio.
-The page shows however many entries are listed. The instructions are at the top of the file.
+The team (About page) and the impact numbers (Home page) live in `data/content.json`. The page shows however many entries are listed.
+
+**Easy way: Pages CMS (forms, no code).** One-time setup by the repo owner:
+1. Go to https://app.pagescms.org and sign in with GitHub.
+2. Install the Pages CMS GitHub App on this repository, then open it.
+3. Invite the client by email (collaborators do not need a GitHub account).
+
+The client then opens the site's "Team & impact numbers" form, adds, edits or removes people (name, role, optional bio) and numbers, and saves.
+Each save is committed to GitHub and Vercel redeploys in about a minute. The form layout is defined in `.pages.yml`.
+
+**By hand:** edit `data/content.json` on GitHub (pencil icon). Keep every quote and comma in place; if a section goes blank, one is missing.
 
 ## Settings
 
@@ -41,7 +49,8 @@ The page shows however many entries are listed. The instructions are at the top 
 | `css/style.css` | Site styles |
 | `css/card-menu.css`, `js/card-menu.js` | 3D photo-card menu (the "Menu" button) |
 | `js/main.js` | Loader, reveal, counters, filters, lightbox, donate and contact forms, audio, cursor |
-| `js/content.js` | **Editable content**: the team (About page) and impact numbers (Home page) |
+| `data/content.json` | **Editable content**: the team (About page) and impact numbers (Home page) |
+| `.pages.yml` | Pages CMS form layout for editing `data/content.json` |
 | `tree.html`, `tree-embed/` | The tree on its own, and a drop-in version for other websites (not used by the site pages) |
 
 ## To do

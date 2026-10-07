@@ -1,0 +1,60 @@
+# Pages CMS (https://app.pagescms.org) editing forms for the website.
+# Edits are saved to data/content.json; the site picks them up after Vercel redeploys (about a minute).
+content:
+  - name: site
+    label: Team & impact numbers
+    type: file
+    path: data/content.json
+    format: json
+    fields:
+      - name: stats
+        label: Impact numbers (Home page)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{number}{suffix}  {label}"
+        fields:
+          - name: number
+            label: Number (digits only)
+            type: number
+            options:
+              min: 0
+          - name: suffix
+            label: Text after the number (for example +)
+            type: string
+          - name: label
+            label: Description
+            type: string
+            required: true
+
+      - name: team
+        label: Team groups (About page)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: title
+            label: Group name (for example Board Members)
+            type: string
+            required: true
+          - name: people
+            label: People in this group
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}, {role}"
+            fields:
+              - name: name
+                label: Name
+                type: string
+                required: true
+              - name: role
+                label: Role or title
+                type: string
+              - name: bio
+                label: Short bio (optional)
+                type: text

@@ -40,27 +40,29 @@ $$('.split-words').forEach(el => {
   });
 });
 
-// ---- Client-editable content: js/content.js fills [data-render="stats"] and [data-render="team"] ----
+// ---- Client-editable content: data/content.json fills [data-render="stats"] and [data-render="team"] ----
+// Edited through Pages CMS (see .pages.yml) or by hand on GitHub.
 const el = (tag, cls, text) => { const n = document.createElement(tag); n.className = cls; if (text != null) n.textContent = text; return n; };
-const content = window.CONTENT || {};
-$('[data-render="stats"]')?.append(...(content.stats || []).map((s, i) => {
-  const box = el('div', 'stat reveal'), num = el('strong', '', '0' + (s.suffix || ''));
-  box.style.setProperty('--d', (i % 4) * 0.08 + 's');
-  num.dataset.count = String(s.number).replace(/,/g, '');
-  num.dataset.suffix = s.suffix || '';
-  box.append(num, el('span', '', s.label));
-  return box;
-}));
-$('[data-render="team"]')?.append(...(content.team || []).flatMap(g => {
-  const grid = el('div', 'people');
-  grid.append(...g.people.map(p => {
-    const card = el('div', 'person');
-    card.append(el('strong', '', p.name), el('span', '', p.role));
-    if (p.bio) card.append(el('p', 'bio', p.bio));
-    return card;
+const render = content => {
+  $('[data-render="stats"]')?.append(...(content.stats || []).map((s, i) => {
+    const box = el('div', 'stat reveal'), num = el('strong', '', '0' + (s.suffix || ''));
+    box.style.setProperty('--d', (i % 4) * 0.08 + 's');
+    num.dataset.count = String(s.number).replace(/,/g, '');
+    num.dataset.suffix = s.suffix || '';
+    box.append(num, el('span', '', s.label));
+    return box;
   }));
-  return [el('p', 'group-title reveal', g.title), grid];
-}));
+  $('[data-render="team"]')?.append(...(content.team || []).flatMap(g => {
+    const grid = el('div', 'people');
+    grid.append(...(g.people || []).map(p => {
+      const card = el('div', 'person');
+      card.append(el('strong', '', p.name), el('span', '', p.role || ''));
+      if (p.bio) card.append(el('p', 'bio', p.bio));
+      return card;
+    }));
+    return [el('p', 'group-title reveal', g.title), grid];
+  }));
+};
 
 // ---- Scroll reveal + counters ----
 const countUp = el => {
@@ -78,7 +80,11 @@ const io = new IntersectionObserver(entries => entries.forEach(e => {
   if (e.target.dataset.count) countUp(e.target);
   io.unobserve(e.target);
 }), { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-$$('.reveal, [data-count]').forEach(el => io.observe(el));
+const observe = () => $$('.reveal, [data-count]').forEach(el => io.observe(el));
+// Pages with editable content load the data first, so the new elements get revealed too.
+$('[data-render]')
+  ? fetch('data/content.json', { cache: 'no-cache' }).then(r => r.json()).then(render).catch(console.error).finally(observe)
+  : observe();
 
 // ---- Filters (projects + gallery) ----
 $$('[data-filter-group]').forEach(group => {
