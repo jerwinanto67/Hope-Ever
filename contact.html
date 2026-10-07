@@ -90,6 +90,34 @@
         </aside>
       </div>
     </section>
+    <section class="section" id="volunteer" aria-labelledby="volunteer-h" style="padding-top:2rem">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">Volunteer &amp; intern</p>
+          <h2 id="volunteer-h" class="reveal">Give your time, <em>grow with us</em></h2>
+          <p class="muted reveal measure" style="margin-top:1.4rem">Interested in an internship, volunteering in the field, or helping in some other way? Tell us a little about yourself. This is only an expression of interest, with no commitment on either side. Our team will get in touch if there is a fit.</p>
+        </div>
+        <form class="panel form reveal w3f" action="https://api.web3forms.com/submit" method="POST">
+          <h3 style="font-size:var(--step-2)">I&rsquo;m interested</h3>
+          <input type="hidden" name="access_key" value="92aceb5c-0b7c-4af2-94e7-28e64e1dadab" />
+          <input type="hidden" name="from_name" value="hopeever.org website" />
+          <input type="hidden" name="subject" value="Volunteer / Internship interest" />
+          <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="field"><label for="v-name">Full name</label><input id="v-name" name="name" type="text" autocomplete="name" required maxlength="120" /></div>
+          <div class="field"><label for="v-email">Email</label><input id="v-email" name="email" type="email" autocomplete="email" required maxlength="160" /></div>
+          <div class="field"><label for="v-phone">Phone <span class="muted">(optional)</span></label><input id="v-phone" name="phone" type="tel" autocomplete="tel" maxlength="20" /></div>
+          <div class="field"><label for="v-interest">I&rsquo;m interested in</label>
+            <select id="v-interest" name="interest">
+              <option>Internship</option><option>Volunteering</option><option>Something else</option>
+            </select>
+          </div>
+          <div class="field"><label for="v-message">About you <span class="muted">(optional)</span></label><textarea id="v-message" name="message" maxlength="4000" placeholder="Your college or occupation, when you are free, skills or interests, or what you have in mind"></textarea></div>
+          <button class="btn btn--solid" type="submit" style="justify-self:start">Express interest &rarr;</button>
+          <p class="muted" style="font-size:.85rem">We use your details only to reply to you. See our <a href="docs/privacy-policy.pdf" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+          <p class="form-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
