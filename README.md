@@ -2,6 +2,15 @@
 
 Static site (plain HTML, CSS and JavaScript, no build step).
 
+## Design rules (client brief)
+
+The site keeps the existing hopeever.org identity; improve it, do not redesign it.
+
+- **Fonts:** Merriweather (headings) and Manrope (text). Nothing else.
+- **Colours:** the tokens at the top of `css/style.css` (green `#0f6e56`, amber `#d4872a`, off-white `#f9f6f1`). No dark page backgrounds.
+- **Motion:** one subtle fade-up on scroll, the sliding partner strip and the hero photo slider. Nothing flashy; respects "reduce motion".
+- **Speed:** keep pages light. Gallery photos have 640px copies in `assets/images/gallery/640/` that the grid uses; the full-size file opens in the lightbox. A new photo works without a 640px copy (it is just served at full size).
+
 ## Run locally
 
 Serve it rather than double-clicking the HTML files, so paths and fonts load as they do online.
@@ -46,15 +55,15 @@ Each save is committed to GitHub and Vercel redeploys in about a minute. The for
 | `projects/*.html` | Project detail pages (linked from each card's "Read more") |
 | `docs/` | Certificates and policy PDFs |
 | `assets/images/` | Photos, partner logos, icons |
-| `css/style.css` | Site styles |
-| `css/card-menu.css`, `js/card-menu.js` | 3D photo-card menu (the "Menu" button) |
-| `js/main.js` | Loader, reveal, counters, filters, lightbox, donate and contact forms, audio, cursor |
+| `css/style.css` | Site styles and design tokens |
+| `js/main.js` | Menu, scroll reveal, counters, hero slider, filters, lightbox, donate and contact forms, language switcher (Tamil / English) |
 | `data/content.json` | **Editable content**: the team (About page) and impact numbers (Home page) |
 | `.pages.yml` | Pages CMS form layout for editing `data/content.json` |
 | `tree.html`, `tree-embed/` | The tree on its own, and a drop-in version for other websites (not used by the site pages) |
 
 ## To do
 
-- Real phone number and Instagram handle (contact page and footer)
+- Instagram handle (the old site shows "@hopeeverfoundation (to be updated)")
+- Confirm the address: this site shows No. 12, Gandhi Nagar 3rd Street, Adyar; the old hopeever.org shows No. 41, Anna Nedunchalai, Kandhanjavadi, Chennai 96. The phone number comes from the old site.
 - Income Tax 10AB approval order: the PDF is missing, so the About page offers "Request a copy".
   Add the file to `docs/` and link it from the certificate card in `about.html`.
